@@ -5,7 +5,7 @@ func ?=<T>(left: inout T, right: T?) {
 }
 
 var name = "Simon"
-let nilName: String?
+let nilName: String? = nil
 let newName: String? = "Simonett"
 
 name ?= nilName 
