@@ -1,3 +1,23 @@
+// Function for mutating or creating collections inside a dictionary
+extension Dictionary where Value: RangeReplaceableCollection {
+    mutating func updateCollection(keyedBy key: Key, with element: Value.Element) {
+        if var collection = self[key] {
+            collection.append(element)
+            self[key] = collection
+        } else {
+            var collection = Value()
+            collection.append(element)
+            self[key] = collection
+        }
+    }
+}
+
+var dict: [String: [Int]] = [:] //dict["key"] = nil
+
+dict.updateCollection(keyedBy: "key", with: 1) // creates the collection: dict["key"] = [1]
+
+dict.updateCollection(keyedBy: "key", with: 2) // updates the collection: dict["key"] = [1, 2]
+
 //The optional assignment operator
 infix operator ?=
 func ?=<T>(left: inout T, right: T?) {
